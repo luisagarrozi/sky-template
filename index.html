@@ -11,33 +11,71 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-  <header class="site-header border-bottom">
-    <nav class="navbar navbar-expand-lg container">
-      <a class="navbar-brand d-flex align-items-center" href="#">
-        <!-- Acrescentar logo -->
-        <img src="logo.png" alt="logo" style="height:32px;margin-right:8px;">
-        <strong>SKY</strong>
-      </a>
-
-      <div class="ms-auto d-flex align-items-center gap-3">
-        <div class="accessibility-controls d-flex gap-2 align-items-center">
-          <button class="btn btn-light btn-sm">Acess</button>
-          <button class="btn btn-light btn-sm">DarkMode</button>
-          <button class="btn btn-light btn-sm">A-</button>
-          <button class="btn btn-light btn-sm">A+</button>
-          <button class="btn btn-light btn-sm">Play</button>
-        </div>
-        <button class="btn btn-outline-primary">Entrar</button>
-        <button class="btn btn-outline-primary">Busca</button>
+  <header class="site-header">
+    <!-- Header -->
+    <div class="header-background">
+      <div class="container-fluid px-0">
+        <nav class="header-nav">
+          <div class="header-logo">
+            <img src="dist/assets/logo-sky.svg" alt="SKY" class="sky-logo">
+          </div>
+          
+          <!-- Accessibilidade -->
+          <div class="accessibility-controls">
+            <button class="btn-accessibility" aria-label="Acessibilidade" title="Acessibilidade">
+              <svg width="16" height="16" viewBox="0 0 16 16">
+                <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 3c.8 0 1.5.7 1.5 1.5S8.8 6 8 6s-1.5-.7-1.5-1.5S7.2 3 8 3zm3 10H5v-1.5h2.25V9.5H5.5V8h5v1.5h-1.75v2H11V13z" fill="currentColor"/>
+              </svg>
+            </button>
+            <button class="btn-contrast" aria-label="Contraste" title="Contraste">
+              <svg width="16" height="16" viewBox="0 0 16 16">
+                <circle cx="8" cy="8" r="8" fill="currentColor"/>
+                <path d="M8 0v16c4.4 0 8-3.6 8-8s-3.6-8-8-8z" fill="white"/>
+              </svg>
+            </button>
+            <button class="btn-font-decrease" aria-label="Diminuir fonte" title="A-">A-</button>
+            <button class="btn-font-increase" aria-label="Aumentar fonte" title="A+">A+</button>
+          </div>
+          
+          <!-- Main Menu -->
+          <div class="header-menu">
+            <a href="#" class="menu-item">
+              <img src="dist/assets/icons/play-icon.svg" alt="" class="menu-icon">
+              <span>Play</span>
+            </a>
+            <a href="#" class="menu-item">
+              <img src="dist/assets/icons/user-icon.svg" alt="" class="menu-icon">
+              <span>Entrar</span>
+            </a>
+          </div>
+          
+          <!-- Busca -->
+          <div class="header-search">
+            <button class="btn-search" aria-label="Buscar" title="Buscar">
+              <img src="dist/assets/icons/lupa.svg" alt="" class="search-icon">
+            </button>
+          </div>
+        </nav>
       </div>
-    </nav>
-
-    <div class="tabs container mt-3">
-      <ul class="nav nav-tabs">
-        <li class="nav-item"><a class="nav-link active" href="#">Filmes</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Séries</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Canais</a></li>
-      </ul>
+      <div class="header-border"></div>
+    </div>
+    
+    <!-- Tabs de Navegação -->
+    <div class="tab-navigation">
+      <div class="container-fluid px-0">
+        <div class="tab-nav-wrapper">
+          <a href="#" class="tab-item active">
+            <span>Filmes</span>
+            <div class="tab-indicator"></div>
+          </a>
+          <a href="#" class="tab-item">
+            <span>Séries</span>
+          </a>
+          <a href="#" class="tab-item">
+            <span>Canais</span>
+          </a>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -117,12 +155,12 @@
     </section>
   </main>
 
-  <footer class="py-4 text-center text-muted">
-   FOOTER
-  </footer>
+  <!-- Footer  -->
+  <div id="footer-menu-container">
+    <!-- Carregado dinamicamente -->
+  </div>
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
   <script src="dist/js/main.min.js"></script>
 </body>
 </html>

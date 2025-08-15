@@ -1,7 +1,21 @@
 
+// Injetar componentes
+function loadComponent(containerId, componentPath) {
+  fetch(componentPath)
+    .then(response => response.text())
+    .then(html => {
+      document.getElementById(containerId).innerHTML = html;
+    })
+    .catch(error => console.error('Error loading component:', error));
+}
+
+// Carregamento do footer
+document.addEventListener('DOMContentLoaded', function() {
+  loadComponent('footer-menu-container', 'dist/components/footer.html');
+});
+
 const RAPIDAPI_KEY = "YOUR_RAPIDAPI_KEY_HERE"; // Estudar se é necessária alguma autenticação
 const RAPIDAPI_HOST = "moviesdatabase.p.rapidapi.com"; // Alterar endereço da API
-
 
 // ENDPOINTS - URLs com placeholder pra buscar os endpoints
 const FEATURED_ENDPOINT = "https://moviesdatabase.p.rapidapi.com/titles?limit=5"; // used with await

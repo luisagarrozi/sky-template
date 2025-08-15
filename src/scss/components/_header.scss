@@ -1,0 +1,270 @@
+.site-header {
+  width: 100%;
+  
+  .header-background {
+    background-color: rgb(241, 242, 250); // #f1f2fa
+    width: 100%;
+    height: 64px;
+    position: relative;
+    
+    .header-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 63px;
+      padding: 0 48px;
+      width: 100%;
+      max-width: 1024px;
+      margin: 0 auto;
+      
+      .header-logo {
+        .sky-logo {
+          width: 86px;
+          height: 31px;
+          // Ajustar
+          filter: brightness(0) saturate(100%) invert(59%) sepia(66%) saturate(3151%) hue-rotate(334deg) brightness(99%) contrast(91%);
+        }
+      }
+      
+      // Accessibilidade
+      .accessibility-controls {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        
+        button {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          border: none;
+          background-color: rgb(250, 250, 255); // #fafaff
+          color: rgba(0, 0, 0, 0.6);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: 'Roboto', sans-serif;
+          font-size: 11px;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          
+          &:hover {
+            background-color: rgba(250, 250, 255, 0.8);
+            transform: scale(1.05);
+          }
+          
+          svg {
+            width: 16px;
+            height: 16px;
+          }
+        }
+        
+        .btn-font-decrease,
+        .btn-font-increase {
+          font-size: 10px;
+          font-weight: 700;
+          line-height: 1;
+        }
+      }
+      
+      // Main Menu
+      .header-menu {
+        display: flex;
+        gap: 45px;
+        align-items: center;
+        
+        .menu-item {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          text-decoration: none;
+          color: rgba(0, 0, 0, 0.6);
+          font-family: 'Roboto', sans-serif;
+          font-size: 16px;
+          font-weight: 700;
+          padding: 15px 0;
+          transition: color 0.2s ease;
+          
+          &:hover {
+            color: rgba(0, 0, 0, 0.8);
+          }
+          
+          .menu-icon {
+            width: 16px;
+            height: 16px;
+            filter: opacity(0.6);
+          }
+          
+          span {
+            line-height: 19px;
+          }
+        }
+      }
+      
+      // Busca
+      .header-search {
+        .btn-search {
+          width: 32px;
+          height: 32px;
+          border: none;
+          background: transparent;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: rgba(0, 0, 0, 0.6);
+          cursor: pointer;
+          border-radius: 50%;
+          transition: background-color 0.2s ease;
+          
+          &:hover {
+            background: rgba(0, 0, 0, 0.04);
+          }
+          
+          .search-icon {
+            width: 16px;
+            height: 16px;
+            filter: opacity(0.6);
+          }
+        }
+      }
+    }
+    
+    .header-border {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: rgba(0, 0, 0, 0.13);
+      opacity: 1;
+    }
+  }
+}
+
+// Tabs de Navegação
+.tab-navigation {
+  background: #ffffff;
+  box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.15);
+  height: 48px;
+  width: 100%;
+  
+  .container-fluid {
+    height: 100%;
+    max-width: 1024px;
+    margin: 0 auto;
+  }
+  
+  .tab-nav-wrapper {
+    display: flex;
+    height: 100%;
+  }
+  
+  .tab-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.6);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    position: relative;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: rgba(0, 0, 0, 0.8);
+    }
+    
+    &.active {
+      color: rgba(243, 92, 88, 0.99);
+      
+      .tab-indicator {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: rgba(243, 92, 88, 0.99);
+        border-radius: 0;
+      }
+    }
+    
+    span {
+      text-align: center;
+      letter-spacing: 0;
+    }
+  }
+}
+
+// Responsividade
+@media (max-width: 1023px) {
+  .site-header {
+    .header-background {
+      .header-nav {
+        padding: 0 24px;
+        gap: 16px;
+        
+        .header-menu {
+          gap: 24px;
+          
+          .menu-item {
+            span {
+              display: none;
+            }
+            
+            .menu-icon {
+              display: block;
+            }
+          }
+        }
+        
+        .accessibility-controls {
+          gap: 12px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .site-header {
+    .header-background {
+      .header-nav {
+        padding: 0 16px;
+        
+        .accessibility-controls {
+          gap: 8px;
+          
+          button {
+            width: 20px;
+            height: 20px;
+            font-size: 9px;
+            
+            svg {
+              width: 14px;
+              height: 14px;
+            }
+          }
+        }
+        
+        .header-menu {
+          gap: 16px;
+        }
+      }
+    }
+  }
+  
+  .tab-navigation {
+    .tab-nav-wrapper {
+      .tab-item {
+        font-size: 14px;
+        
+        span {
+          padding: 0 8px;
+        }
+      }
+    }
+  }
+}

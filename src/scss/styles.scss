@@ -1,4 +1,6 @@
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "components/header";
+@import "components/footer-menu";
 
 $bg: #f8f9fb;
 $card-bg: #ffffff;
@@ -10,27 +12,7 @@ body {
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
-.site-header {
-  background: white;
-  .navbar {
-    padding: 1rem 0;
-  }
-  .tabs {
-    .nav-tabs {
-      border-bottom: none;
-      .nav-link {
-        color: #4b5563;
-        &.active {
-          color: #e83e3e;
-          border-bottom: 3px solid $accent;
-          border-radius: 0;
-        }
-      }
-    }
-  }
-}
-
-/* Carrossel principal */
+// Carrossel principal
 #featuredCarousel {
   .carousel-track {
     overflow: hidden;
@@ -67,7 +49,7 @@ body {
   .carousel-arrow.right { right: 8px; }
 }
 
-/* Carrosseis secundários */
+// Carrosseis secundários
 .movie-row {
   position: relative;
   .row-track {
@@ -102,7 +84,7 @@ body {
   .row-arrow.right { right: -12px; }
 }
 
-/* Responsividade inicial */
+// Responsividade inicial
 @media (max-width: 992px) {
   #featuredCarousel .featured-card { flex: 0 0 90%; max-width: 90%; }
   .movie-row .movie-card { flex: 0 0 120px; width: 120px; }
