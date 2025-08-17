@@ -1,0 +1,249 @@
+
+.carousel-section {
+  margin-bottom: 48px;
+}
+
+.carousel-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 80px;
+}
+
+.carousel-title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.87);
+  margin: 0 0 16px 0;
+}
+
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-track-container {
+  flex: 1;
+  overflow: hidden;
+  margin: 0;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 16px;
+  transition: transform 0.3s ease;
+  padding: 38px 0;
+}
+
+.movie-card {
+  flex-shrink: 0;
+  width: 200px;
+  height: 300px;
+  position: relative;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.38);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+  
+  &.small {
+    width: 64px;
+    height: 300px;
+  }
+}
+
+.movie-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.movie-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 100%);
+  border-radius: 4px;
+}
+
+.movie-card-icon {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 31px;
+  height: 31px;
+  
+  .icon-circle-fill {
+    width: 25px;
+    height: 25px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+  }
+  
+  .icon-circle-stroke {
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .icon-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    
+    svg {
+      width: 100%;
+      height: 100%;
+      fill: white;
+    }
+  }
+}
+
+// Navegação
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 64px;
+  border: none;
+  background: rgba(67, 73, 75, 1);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  z-index: 10;
+  
+  &:hover:not(.disabled) {
+    background: rgba(67, 73, 75, 0.8);
+  }
+  
+  &.disabled {
+    opacity: 0.12;
+    cursor: not-allowed;
+  }
+  
+  svg {
+    width: 7px;
+    height: 12px;
+  }
+}
+
+.carousel-nav-left {
+  left: 2px;
+  
+  &.disabled {
+    width: 32px;
+  }
+}
+
+.carousel-nav-right {
+  right: 2px;
+}
+
+// Responsividade
+@media (max-width: 1024px) {
+  .carousel-container {
+    padding: 0 16px;
+  }
+  
+  .carousel-title {
+    margin-left: 0;
+  }
+  
+  .carousel-track-container {
+    margin: 0 16px;
+  }
+  
+  .movie-card {
+    width: 120px;
+    height: 180px;
+    
+    &.small {
+      width: 70px;
+      height: 105px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-track {
+    gap: 4px;
+    padding: 20px 0;
+  }
+  
+  .movie-card {
+    width: 100px;
+    height: 150px;
+    
+    &.small {
+      width: 60px;
+      height: 90px;
+    }
+  }
+  
+  .carousel-nav-btn {
+    width: 24px;
+    height: 48px;
+  }
+}
+
+// Animações
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.movie-card {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+// Loading
+.carousel-track.loading {
+  .movie-card {
+    background: #f0f0f0;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+      animation: shimmer 1.5s infinite;
+    }
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}

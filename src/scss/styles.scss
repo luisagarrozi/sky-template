@@ -1,6 +1,7 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "components/header";
-@import "components/footer-menu";
+@import "components/footer";
+@import "components/carousel";
 
 $bg: #f8f9fb;
 $card-bg: #ffffff;
@@ -12,7 +13,7 @@ body {
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
-// Carrossel principal
+// Destaques
 #featuredCarousel {
   .carousel-track {
     overflow: hidden;

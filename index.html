@@ -23,15 +23,14 @@
           <!-- Accessibilidade -->
           <div class="accessibility-controls">
             <button class="btn-accessibility" aria-label="Acessibilidade" title="Acessibilidade">
-              <svg width="16" height="16" viewBox="0 0 16 16">
-                <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 3c.8 0 1.5.7 1.5 1.5S8.8 6 8 6s-1.5-.7-1.5-1.5S7.2 3 8 3zm3 10H5v-1.5h2.25V9.5H5.5V8h5v1.5h-1.75v2H11V13z" fill="currentColor"/>
-              </svg>
+              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.75 6.99c-.14-.55-.69-.87-1.24-.75-2.38.53-5.03.76-7.51.76s-5.13-.23-7.51-.76c-.55-.12-1.1.2-1.24.75-.14.56.2 1.13.75 1.26 1.61.36 3.35.61 5 .75v12c0 .55.45 1 1 1s1-.45 1-1v-5h2v5c0 .55.45 1 1 1s1-.45 1-1V9c1.65-.14 3.39-.39 4.99-.75.56-.13.9-.7.76-1.26zM12 6c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg>
             </button>
             <button class="btn-contrast" aria-label="Contraste" title="Contraste">
-              <svg width="16" height="16" viewBox="0 0 16 16">
-                <circle cx="8" cy="8" r="8" fill="currentColor"/>
-                <path d="M8 0v16c4.4 0 8-3.6 8-8s-3.6-8-8-8z" fill="white"/>
-              </svg>
+             <svg fill="currentColor" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
+<path d="M10,20C4.5,20,0,15.5,0,10S4.5,0,10,0s10,4.5,10,10S15.5,20,10,20z M10,2c-4.4,0-8,3.6-8,8s3.6,8,8,8s8-3.6,8-8S14.4,2,10,2
+	z"/>
+<path d="M10,4v12c3.3,0,6-2.7,6-6S13.3,4,10,4z"/>
+</svg>
             </button>
             <button class="btn-font-decrease" aria-label="Diminuir fonte" title="A-">A-</button>
             <button class="btn-font-increase" aria-label="Aumentar fonte" title="A+">A+</button>
@@ -79,85 +78,160 @@
     </div>
   </header>
 
-  <main class="container mt-4">
-    <!-- Carrossel grande -->
-    <section id="featuredSection" class="mb-5">
-      <div id="featuredCarousel" class="position-relative">
-        <div class="carousel-track d-flex gap-3">
-          <!-- Cards serão inseridos aqui após busca da API -->
-        </div>
-
-        <button class="carousel-arrow left">Botões carrossel</button>
-
-        <div class="carousel-dots mt-2 text-center"></div>
-      </div>
-    </section>
-
-    <!-- Carrosseis menores -->
-    <section class="mb-5">
-      <h5>Os mais temidos</h5>
-      <div class="row">
-        <div class="col-12">
-          <div class="movie-row" id="row-most-feared">
-            <button class="row-arrow left">&lsaquo;</button>
-            <div class="row-track d-flex gap-3 overflow-hidden">
-              <!-- 15 cards -->
-            </div>
-            <button class="row-arrow right">&rsaquo;</button>
+  <main class="main-content">
+    <!-- Destaques -->
+    <section class="highlight-section">
+      <div class="highlight-container">
+        <div class="highlight-left">
+          <div class="highlight-card">
+            <img src="https://picsum.photos/249/258?random=1" alt="Featured content" class="highlight-image">
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="mb-5">
-      <h5>Cinema nacional</h5>
-      <div class="row">
-        <div class="col-12">
-          <div class="movie-row" id="row-cinema-nacional">
-            <button class="row-arrow left">&lsaquo;</button>
-            <div class="row-track d-flex gap-3 overflow-hidden">
-              <!-- 15 cards -->
-            </div>
-            <button class="row-arrow right">&rsaquo;</button>
+        
+        <div class="highlight-center">
+          <div class="highlight-card highlight-main">
+            <img src="https://picsum.photos/512/288?random=2" alt="Main featured content" class="highlight-image">
           </div>
+        </div>
+
+        <div class="highlight-right">
+          <div class="highlight-card">
+            <img src="https://picsum.photos/247/258?random=3" alt="Featured content" class="highlight-image">
+          </div>
+        </div>
+        
+        <!-- Navegação -->
+        <button class="highlight-nav-btn highlight-nav-left" aria-label="Anterior">
+          <svg width="21" height="16" viewBox="0 0 21 16" fill="none">
+            <path d="M21 7H3.83L9.42 1.41L8 0L0 8L8 16L9.41 14.59L3.83 9H21V7Z" fill="white" fill-opacity="0.7"/>
+          </svg>
+        </button>
+        <button class="highlight-nav-btn highlight-nav-right" aria-label="Próximo">
+          <svg width="21" height="16" viewBox="0 0 21 16" fill="none">
+            <path d="M0 9H17.17L11.58 14.59L13 16L21 8L13 0L11.59 1.41L17.17 7H0V9Z" fill="white" fill-opacity="0.7"/>
+          </svg>
+        </button>
+
+        <div class="highlight-bullets">
+          <div class="bullet active"></div>
+          <div class="bullet"></div>
+          <div class="bullet"></div>
         </div>
       </div>
     </section>
 
-        <section class="mb-5">
-      <h5>DC Comics</h5>
-      <div class="row">
-        <div class="col-12">
-          <div class="movie-row" id="row-cinema-nacional">
-            <button class="row-arrow left">&lsaquo;</button>
-            <div class="row-track d-flex gap-3 overflow-hidden">
-              <!-- 15 cards -->
+    <!-- Carrossel 1: Os mais temidos -->
+    <section class="carousel-section">
+      <div class="carousel-container">
+        <h2 class="carousel-title">Os mais temidos</h2>
+        
+        <div class="carousel-wrapper">
+          <button class="carousel-nav-btn carousel-nav-left disabled" aria-label="Anterior" data-carousel="most-feared">
+            <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
+              <path d="M6 1L1 6L6 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          
+          <div class="carousel-track-container">
+            <div class="carousel-track" id="most-feared-track">
+              <!-- Cards inseridos aqui -->
             </div>
-            <button class="row-arrow right">&rsaquo;</button>
           </div>
+          
+          <button class="carousel-nav-btn carousel-nav-right" aria-label="Próximo" data-carousel="most-feared">
+            <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
+              <path d="M1 1L6 6L1 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
         </div>
       </div>
     </section>
 
-        <section class="mb-5">
-      <h5>Marvel</h5>
-      <div class="row">
-        <div class="col-12">
-          <div class="movie-row" id="row-cinema-nacional">
-            <button class="row-arrow left">&lsaquo;</button>
-            <div class="row-track d-flex gap-3 overflow-hidden">
-              <!-- 15 cards -->
+    <!-- Carrossel 2: Coleção Nacional -->
+    <section class="carousel-section">
+      <div class="carousel-container">
+        <h2 class="carousel-title">Coleção Nacional</h2>
+        
+        <div class="carousel-wrapper">
+          <button class="carousel-nav-btn carousel-nav-left disabled" aria-label="Anterior" data-carousel="national-collection">
+            <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
+              <path d="M6 1L1 6L6 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          
+          <div class="carousel-track-container">
+            <div class="carousel-track" id="national-collection-track">
+             <!-- Cards inseridos aqui -->
             </div>
-            <button class="row-arrow right">&rsaquo;</button>
           </div>
+          
+          <button class="carousel-nav-btn carousel-nav-right" aria-label="Próximo" data-carousel="national-collection">
+            <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
+              <path d="M1 1L6 6L1 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Carrossel 3: DC Comics -->
+    <section class="carousel-section">
+      <div class="carousel-container">
+        <h2 class="carousel-title">DC Comics</h2>
+        
+        <div class="carousel-wrapper">
+          <button class="carousel-nav-btn carousel-nav-left disabled" aria-label="Anterior" data-carousel="dc-comics">
+            <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
+              <path d="M6 1L1 6L6 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          
+          <div class="carousel-track-container">
+            <div class="carousel-track" id="dc-comics-track">
+              <!-- Cards inseridos aqui -->
+            </div>
+          </div>
+          
+          <button class="carousel-nav-btn carousel-nav-right" aria-label="Próximo" data-carousel="dc-comics">
+            <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
+              <path d="M1 1L6 6L1 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Carrossel 4: Marvel -->
+    <section class="carousel-section">
+      <div class="carousel-container">
+        <h2 class="carousel-title">Marvel</h2>
+        
+        <div class="carousel-wrapper">
+          <button class="carousel-nav-btn carousel-nav-left disabled" aria-label="Anterior" data-carousel="marvel">
+            <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
+              <path d="M6 1L1 6L6 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          
+          <div class="carousel-track-container">
+            <div class="carousel-track" id="marvel-track">
+             <!-- Cards inseridos aqui -->
+            </div>
+          </div>
+          
+          <button class="carousel-nav-btn carousel-nav-right" aria-label="Próximo" data-carousel="marvel">
+            <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
+              <path d="M1 1L6 6L1 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer  -->
+  <!-- Footer Component -->
   <div id="footer-menu-container">
-    <!-- Carregado dinamicamente -->
+    <!-- Inserido via javascript de from dist/components/footer.html -->
   </div>
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
