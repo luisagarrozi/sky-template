@@ -1,60 +1,60 @@
+$center-w: 695px;
+$center-h: 390px;
+$side-scale: 0.9;
+$peek: 120px;
 
 .highlight-section {
   position: relative;
-  margin-top: 23px;
-  margin-bottom: 48px;
+  margin: 23px auto 48px auto;
+  max-width: 1920px;
 }
 
 .highlight-container {
-  position: relative;
-  display: flex;
-  gap: 8px;
   max-width: 1024px;
   margin: 0 auto;
   padding: 0 2px;
 }
 
-// Destaques
-.highlight-card {
+.highlight-slider {
   position: relative;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.38);
-  overflow: hidden;
-  
-  .highlight-image {
+  margin: 0 auto;
+}
+
+.highlight-slide {
+  width: $center-w;
+  height: $center-h;
+
+  img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    border-radius: 6px;
   }
 }
 
-.highlight-left {
-  width: 249px;
-  height: 258px;
-  flex-shrink: 0;
+.tns-outer, .tns-ovh, .tns-inner {
+  overflow: visible;
 }
 
-.highlight-center {
-  width: 512px;
-  height: 288px;
-  flex-shrink: 0;
-  margin-top: -15px;
+#highlight-slider {
+  .tns-item {
+    transform: scale($side-scale);
+    transform-origin: center center;
+    transition: transform 0.25s ease;
+  }
+  .tns-slide-active {
+    transform: scale(1);
+    z-index: 2;
+  }
 }
 
-.highlight-right {
-  width: 247px;
-  height: 258px;
-  flex-shrink: 0;
-}
-
-// Navegação
+// Setas laterais
 .highlight-nav-btn {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 54px;
-  height: 54px;
+  top: 175px;
+  width: 40px;
+  height: 40px;
   border: none;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.6);
@@ -63,52 +63,44 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s ease;
   z-index: 10;
-  
+
   &:hover {
     background: rgba(0, 0, 0, 0.8);
   }
-  
+
   svg {
     width: 21px;
     height: 16px;
   }
 }
 
-.highlight-nav-left {
-  left: 22px;
-}
+.highlight-nav-left { left: 8px; }
+.highlight-nav-right { right: 8px; }
 
-.highlight-nav-right {
-  right: 22px;
-}
-
+// Dots
 .highlight-bullets {
   position: absolute;
-  bottom: 16px;
+  bottom: 12px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   gap: 8px;
   z-index: 10;
-}
 
-.bullet {
-  width: 16px;
-  height: 4px;
-  border-radius: 3px;
-  background: rgba(143, 150, 154, 1);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  
-  &.active {
-    background: rgba(243, 92, 88, 1);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16);
-  }
-  
-  &:hover:not(.active) {
-    background: rgba(143, 150, 154, 0.8);
+  button {
+    width: 16px;
+    height: 4px;
+    border-radius: 3px;
+    border: 0;
+    background: rgba(143, 150, 154, 1);
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &.tns-nav-active {
+      background: rgba(243, 92, 88, 1);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16);
+    }
   }
 }
 
@@ -116,42 +108,14 @@
 @media (max-width: 1024px) {
   .highlight-container {
     padding: 0 16px;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
-  
-  .highlight-left,
-  .highlight-right {
-    width: 100%;
-    max-width: 400px;
-    height: 200px;
-  }
-  
-  .highlight-center {
-    width: 100%;
-    max-width: 600px;
-    height: 250px;
-    margin-top: 0;
-  }
-  
-  .highlight-nav-btn {
-    display: none;
   }
 }
 
 @media (max-width: 768px) {
-  .highlight-section {
-    margin-top: 16px;
-    margin-bottom: 32px;
-  }
-  
-  .highlight-left,
-  .highlight-right {
-    height: 180px;
-  }
-  
-  .highlight-center {
-    height: 220px;
+  .highlight-bullets { bottom: 8px; }
+  .highlight-nav-btn {
+    width: 34px;
+    height: 34px;
+    top: 6px;
   }
 }

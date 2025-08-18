@@ -14,8 +14,12 @@
       height: 63px;
       padding: 0 48px;
       width: 100%;
-      max-width: 1024px;
       margin: 0 auto;
+
+      .header-menu-row {
+      display: flex;
+      align-items: center;
+      }
       
       .header-logo {
         .sky-logo {
@@ -29,6 +33,7 @@
         display: flex;
         gap: 16px;
         align-items: center;
+        margin-left: 40px;
         
         button {
           width: 24px;
@@ -72,12 +77,17 @@
         gap: 45px;
         align-items: center;
         
+        &.header-play {
+          margin-left: 48px
+        }
+
+
         .menu-item {
           display: flex;
           align-items: center;
-          gap: 6px;
+          gap: 8px;
           text-decoration: none;
-          color: rgb(96,96,100);
+          color: #606064;
           font-family: 'Roboto', sans-serif;
           font-size: 16px;
           font-weight: 700;
@@ -103,6 +113,7 @@
       // Busca
       .header-search {
         .btn-search {
+          margin-left: 18px;
           width: 32px;
           height: 32px;
           border: none;
@@ -149,7 +160,6 @@
   
   .container-fluid {
     height: 100%;
-    max-width: 1024px;
     margin: 0 auto;
   }
   

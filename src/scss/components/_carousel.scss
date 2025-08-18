@@ -4,9 +4,8 @@
 }
 
 .carousel-container {
-  max-width: 1440px;
   margin: 0 auto;
-  padding: 0 80px;
+  padding: 0 0 0 80px;
 }
 
 .carousel-title {
@@ -34,7 +33,7 @@
   display: flex;
   gap: 16px;
   transition: transform 0.3s ease;
-  padding: 38px 0;
+  padding: 6px 0;
 }
 
 .movie-card {
@@ -50,11 +49,6 @@
   
   &:hover {
     transform: scale(1.05);
-  }
-  
-  &.small {
-    width: 64px;
-    height: 300px;
   }
 }
 
@@ -179,11 +173,6 @@
   .movie-card {
     width: 120px;
     height: 180px;
-    
-    &.small {
-      width: 70px;
-      height: 105px;
-    }
   }
 }
 
@@ -196,11 +185,7 @@
   .movie-card {
     width: 100px;
     height: 150px;
-    
-    &.small {
-      width: 60px;
-      height: 90px;
-    }
+
   }
   
   .carousel-nav-btn {

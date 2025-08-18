@@ -2,6 +2,7 @@
 @import "components/header";
 @import "components/footer";
 @import "components/carousel";
+@import "components/highlight";
 
 $bg: #f8f9fb;
 $card-bg: #ffffff;
@@ -24,7 +25,7 @@ body {
   .featured-card {
     flex: 0 0 65%;
     max-width: 65%;
-    border-radius: 8px;
+    border-radius: 4px;
     background: $card-bg;
     box-shadow: 0 6px 20px rgba(0,0,0,.12);
     overflow: hidden;
@@ -46,8 +47,6 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,.12);
     cursor: pointer;
   }
-  .carousel-arrow.left { left: 8px; }
-  .carousel-arrow.right { right: 8px; }
 }
 
 // Carrosseis secundários
@@ -62,7 +61,7 @@ body {
   .movie-card {
     flex: 0 0 140px;
     width: 140px;
-    border-radius: 6px;
+    border-radius: 4px;
     overflow: hidden;
     background: $card-bg;
     box-shadow: 0 4px 12px rgba(0,0,0,.08);
