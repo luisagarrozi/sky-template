@@ -21,9 +21,9 @@ const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
 const API_ENDPOINTS = {
-  FEATURED: `${TMDB_BASE_URL}/movie/top_rated?api_key=${TMDB_API_KEY}&language=en-US&page=1`,
+  FEATURED: `${TMDB_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}&language=en-US&sort_by=revenue.desc&primary_release_year=2024&page=1`,
   MOST_FEARED: `${TMDB_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}&language=en-US&page=1&with_genres=27&sort_by=popularity.desc`,
-  NATIONAL_COLLECTION: `${TMDB_BASE_URL}/movie/popular?api_key=${TMDB_API_KEY}&language=en-US&page=1`,
+  NATIONAL_COLLECTION: `${TMDB_BASE_URL}/movie/popular?api_key=${TMDB_API_KEY}&language=pt-BR&page=1`,
   DC_COMICS: `${TMDB_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}&language=en-US&page=1&with_companies=9993&sort_by=popularity.desc`,
   MARVEL: `${TMDB_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}&language=en-US&page=1&with_companies=420&sort_by=popularity.desc`
 };
@@ -31,14 +31,12 @@ const API_ENDPOINTS = {
 // Teste da API
 async function testApiConnection() {
   try {
-    console.log('Testing TMDb API connection...');
     const testUrl = `${TMDB_BASE_URL}/movie/popular?api_key=${TMDB_API_KEY}&language=en-US&page=1`;
     const response = await fetch(testUrl, {
       method: 'GET',
       headers: { 'accept': 'application/json' }
     });
     if (response.ok) {
-      console.log('TMDb API connection successful');
       return true;
     } else {
       console.error('TMDb API connection failed:', response.status, response.statusText);
@@ -53,7 +51,6 @@ async function testApiConnection() {
 // Fetch com timeout
 async function fetchFromApi(url) {
   try {
-    console.log('Fetching from TMDb API:', url);
     const timeoutPromise = new Promise((_, reject) => 
       setTimeout(() => reject(new Error('Request timeout')), 10000)
     );
@@ -67,7 +64,6 @@ async function fetchFromApi(url) {
       throw new Error(`TMDb API error: ${response.status} - ${response.statusText}`);
     }
     const data = await response.json();
-    console.log('TMDb API response received:', data);
     return data;
   } catch (error) {
     console.error('TMDb API fetch error:', error.message);
@@ -83,6 +79,18 @@ function getImageUrl(item) {
   }
   if (item.backdrop_path) {
     return `${TMDB_IMAGE_BASE_URL}${item.backdrop_path}`;
+  }
+  return null;
+}
+
+function getHighlightsImageUrl(item) {
+  if (!item) return null;
+  if (item.backdrop_path) {
+    return `${TMDB_IMAGE_BASE_URL}${item.backdrop_path}`;
+  }
+
+  if (item.poster_path) {
+    return `${TMDB_IMAGE_BASE_URL}${item.poster_path}`;
   }
   return null;
 }
@@ -341,21 +349,10 @@ function createImageSlider(container, options = {}) {
    Destaques - Buscar imagens "Featured" e montar o slider com "peek"
    ============================================================================ */
 async function fetchFeaturedImageUrls() {
-  const fallbacks = [
-    'https://picsum.photos/695/390?random=1',
-    'https://picsum.photos/695/390?random=2',
-    'https://picsum.photos/695/390?random=3',
-    'https://picsum.photos/695/390?random=4',
-    'https://picsum.photos/695/390?random=5'
-  ];
-
-  console.log('[Highlight] Fetching FEATURED from TMDb:', API_ENDPOINTS.FEATURED);
   const data = await fetchFromApi(API_ENDPOINTS.FEATURED);
   const results = (data?.results || []).slice(0, 5);
 
-  const urls = results.map((item, i) => getImageUrl(item) || fallbacks[i]);
-  while (urls.length < 5) urls.push(fallbacks[urls.length]);
-  console.log('[Highlight] Fetched FEATURED, image URLs:', urls);
+  const urls = results.map((item, i) => getHighlightsImageUrl(item));
   return urls;
 }
 
