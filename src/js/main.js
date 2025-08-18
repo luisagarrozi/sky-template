@@ -10,8 +10,10 @@ function loadComponent(containerId, componentPath) {
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
+  
   loadComponent('footer-menu-container', 'dist/components/footer.html');
-  initializeHighlightSection(); // Destaques
+  
+  await initializeHighlightSection(); // Destaques
   initializeAllCarousels();     // Demais carrosséis
 });
 
@@ -59,6 +61,7 @@ async function fetchFromApi(url) {
       headers: { 'accept': 'application/json' }
     });
     const response = await Promise.race([fetchPromise, timeoutPromise]);
+    
     if (!response.ok) {
       console.error(`TMDb API error: ${response.status} - ${response.statusText}`);
       throw new Error(`TMDb API error: ${response.status} - ${response.statusText}`);
@@ -99,11 +102,27 @@ function createImageSlider(container, options = {}) {
   const root = typeof container === 'string' ? document.querySelector(container) : container;
   if (!root) throw new Error('createImageSlider: container not found');
 
+  // Get responsive dimensions
+  const getResponsiveDimensions = () => {
+    const width = window.innerWidth;
+    if (width <= 430) {
+      return { width: 260, height: 146 };
+    } else if (width <= 480) {
+      return { width: 288, height: 162 };
+    } else if (width <= 1250) {
+      return { width: 512, height: 288 };
+    } else {
+      return { width: 695, height: 390 };
+    }
+  };
+
+  const responsiveDims = getResponsiveDimensions();
+
   const opts = {
     autoPlay: false,
     autoPlayInterval: 5000,
-    centerWidth: 695,
-    centerHeight: 390,
+    centerWidth: responsiveDims.width,
+    centerHeight: responsiveDims.height,
     sideScale: 0.9,
     peek: 120,
     prevButton: null,
@@ -350,10 +369,17 @@ function createImageSlider(container, options = {}) {
    ============================================================================ */
 async function fetchFeaturedImageUrls() {
   const data = await fetchFromApi(API_ENDPOINTS.FEATURED);
+  
   const results = (data?.results || []).slice(0, 5);
 
   const urls = results.map((item, i) => getHighlightsImageUrl(item));
   return urls;
+}
+
+async function fetchCarouselData(endpoint, limit = 15) {
+  const data = await fetchFromApi(endpoint);
+  const results = (data?.results || []).slice(0, limit);
+  return results;
 }
 
 async function initializeHighlightSection() {
@@ -362,6 +388,22 @@ async function initializeHighlightSection() {
     console.warn('[Highlight] .highlight-container not found. Skipping highlight slider init.');
     return;
   }
+
+  // Get responsive dimensions
+  const getResponsiveDimensions = () => {
+    const width = window.innerWidth;
+    if (width <= 430) {
+      return { width: 260, height: 146 };
+    } else if (width <= 480) {
+      return { width: 288, height: 162 };
+    } else if (width <= 1250) {
+      return { width: 512, height: 288 };
+    } else {
+      return { width: 695, height: 390 };
+    }
+  };
+
+  const responsiveDims = getResponsiveDimensions();
 
   highlightContainer.innerHTML = `
     <button class="highlight-nav-btn highlight-nav-left" aria-label="Anterior">
@@ -388,8 +430,8 @@ async function initializeHighlightSection() {
   // Criar slider com controles externos
   const slider = createImageSlider(sliderMount, {
     autoPlay: false,
-    centerWidth: 695,
-    centerHeight: 390,
+    centerWidth: responsiveDims.width,
+    centerHeight: responsiveDims.height,
     sideScale: 0.9,
     peek: 120,
     prevButton: prevBtn,
@@ -397,22 +439,19 @@ async function initializeHighlightSection() {
     dotsContainer: bulletsContainer
   });
 
+  // Ensure bullets sit exactly 16px below: keep them after the slider and use CSS
+  // The bullets container remains a sibling of the slider to avoid overlap issues
+
   // Buscar imagens "Featured" e carregar no slider
   try {
     const imageUrls = await fetchFeaturedImageUrls();
     slider.loadImages(imageUrls);
     window.highlightSlider = slider;
-  } catch (err) {
-    console.error('[Highlight] Failed to load FEATURED. Using fallbacks.', err);
-    slider.loadImages([
-      'https://picsum.photos/695/390?random=1',
-      'https://picsum.photos/695/390?random=2',
-      'https://picsum.photos/695/390?random=3',
-      'https://picsum.photos/695/390?random=4',
-      'https://picsum.photos/695/390?random=5'
-    ]);
-    window.highlightSlider = slider;
-  }
+
+      
+    } catch (err) {
+      console.error('[Highlight] Failed to load FEATURED. Using fallbacks.', err);
+    }
 }
 
 // Atualizar slider externamente
@@ -422,6 +461,39 @@ window.refreshHighlightSlider = function(newImageUrls) {
     window.highlightSlider.loadImages(newImageUrls);
   }
 };
+
+// Function to update highlight slider dimensions on resize
+function updateHighlightSliderDimensions() {
+  if (window.highlightSlider) {
+    const getResponsiveDimensions = () => {
+      const width = window.innerWidth;
+      if (width <= 430) {
+        return { width: 260, height: 146 };
+      } else if (width <= 480) {
+        return { width: 288, height: 162 };
+      } else if (width <= 1250) {
+        return { width: 512, height: 288 };
+      } else {
+        return { width: 695, height: 390 };
+      }
+    };
+
+    const responsiveDims = getResponsiveDimensions();
+    
+    // Update the slider container dimensions
+    const sliderMount = document.getElementById('highlight-slider');
+    if (sliderMount) {
+      const sliderContainer = sliderMount.querySelector('.slider-container');
+      if (sliderContainer) {
+        sliderContainer.style.width = `${responsiveDims.width}px`;
+        sliderContainer.style.height = `${responsiveDims.height}px`;
+      }
+    }
+  }
+}
+
+// Add resize listener
+window.addEventListener('resize', updateHighlightSliderDimensions);
 
 // Carrosséis
 function initializeAllCarousels() {
@@ -475,8 +547,7 @@ function setupCarouselNavigation(carouselName) {
 
 async function loadCarouselContent(trackId, endpoint) {
   try {
-    const data = await fetchFromApi(endpoint);
-    const items = data.results || [];
+    const items = await fetchCarouselData(endpoint, 15);
     
     const track = document.getElementById(trackId);
     if (!track) return;
@@ -499,8 +570,9 @@ async function loadCarouselContent(trackId, endpoint) {
 }
 
 function createMovieCard(item, index) {
-  const card = document.createElement('div');
+  const card = document.createElement('article');
   card.className = `movie-card`;
+  card.setAttribute('role', 'listitem');
   
   const imageUrl = getImageUrl(item) || `https://picsum.photos/140/210?random=${index + 10}`;
   const title = item.title || 'Unknown Title';
@@ -517,6 +589,15 @@ function createMovieCard(item, index) {
   card.addEventListener('click', () => {
     console.log('Movie clicked:', title);
     // Ajuste futuro: Acrescentar detalhes do filme
+  });
+  
+  // Adicionar navegação por teclado
+  card.setAttribute('tabindex', '0');
+  card.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      card.click();
+    }
   });
   
   return card;

@@ -7,17 +7,29 @@ $peek: 120px;
   position: relative;
   margin: 23px auto 48px auto;
   max-width: 1920px;
+  overflow: hidden;
 }
 
 .highlight-container {
   max-width: 1024px;
   margin: 0 auto;
   padding: 0 2px;
+  overflow: hidden;
 }
 
 .highlight-slider {
   position: relative;
   margin: 0 auto;
+  overflow: hidden;
+}
+
+.image-slider {
+  position: relative;
+  width: 695px;
+  height: 390px;
+  margin: 0 auto;
+  border-radius: 6px;
+  overflow: visible;
 }
 
 .highlight-slide {
@@ -78,44 +90,169 @@ $peek: 120px;
 .highlight-nav-left { left: 8px; }
 .highlight-nav-right { right: 8px; }
 
-// Dots
+// Bullets for highlights
 .highlight-bullets {
   position: absolute;
-  bottom: 12px;
+  bottom: -16px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   gap: 8px;
   z-index: 10;
+  pointer-events: auto;
 
-  button {
+  .dot {
     width: 16px;
     height: 4px;
-    border-radius: 3px;
-    border: 0;
-    background: rgba(143, 150, 154, 1);
+    margin: 0 8px 0 0;
+    background-color: rgba(143, 150, 154, 1);
+    border: none;
+    border-radius: 2px;
     cursor: pointer;
     transition: all 0.2s ease;
 
-    &.tns-nav-active {
-      background: rgba(243, 92, 88, 1);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16);
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &.active {
+      background-color: #f35c58;
+    }
+
+    &:hover {
+      background-color: rgba(243, 92, 88, 0.8);
     }
   }
 }
 
 // Responsividade
+@media (max-width: 1250px) {
+  .highlight-container {
+    padding: 0 16px;
+    max-width: 100%;
+  }
+  
+  .image-slider {
+    width: 512px;
+    height: 288px;
+    max-width: 100%;
+  }
+  
+  .highlight-slide {
+    width: 512px;
+    height: 288px;
+    max-width: 100%;
+  }
+  
+  .highlight-nav-btn {
+    top: 124px;
+  }
+}
+
 @media (max-width: 1024px) {
   .highlight-container {
     padding: 0 16px;
+    max-width: 100%;
   }
 }
 
 @media (max-width: 768px) {
-  .highlight-bullets { bottom: 8px; }
+  .highlight-container {
+    padding: 0 8px;
+    max-width: 100%;
+  }
+  
+  .image-slider {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+  
+  .highlight-slide {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+  
+  .highlight-bullets { bottom: -8px; }
   .highlight-nav-btn {
     width: 34px;
     height: 34px;
-    top: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .highlight-container {
+    padding: 0 4px;
+    max-width: 100%;
+  }
+  
+  .image-slider {
+    width: 100%;
+    max-width: 288px;
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+  
+  .highlight-slide {
+    width: 100%;
+    max-width: 288px;
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+  
+  .highlight-nav-btn {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+  }
+  
+  .highlight-bullets {
+    bottom: -8px;
+    
+    .dot {
+      width: 12px;
+      height: 3px;
+      margin: 0 6px 0 0;
+    }
+  }
+}
+
+@media (max-width: 430px) {
+  .highlight-container {
+    padding: 0 2px;
+    max-width: 100%;
+  }
+  
+  .image-slider {
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+  
+  .highlight-slide {
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+  
+  .highlight-nav-btn {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .highlight-bullets {
+    bottom: -6px;
+    
+    .dot {
+      width: 10px;
+      height: 3px;
+      margin: 0 4px 0 0;
+    }
   }
 }

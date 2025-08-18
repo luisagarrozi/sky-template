@@ -1,9 +1,11 @@
 .carousel-section {
   margin-bottom: 48px;
+  overflow: hidden;
 }
 
 .carousel-container {
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .carousel-title {
@@ -20,6 +22,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
 
 .carousel-track-container {
@@ -45,10 +48,17 @@
   box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.38);
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
 
   &:hover {
     transform: scale(1.05);
+  }
+
+  &:focus {
+    outline: 2px solid #f35c58;
+    outline-offset: 2px;
+    box-shadow: 0 8px 16px rgba(243, 92, 88, 0.3);
   }
 }
 
@@ -91,17 +101,14 @@
     inset: 3px;
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.50);
+    backdrop-filter: blur(4px);
   }
 
   .icon-circle-stroke {
-  position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
-  box-sizing: border-box;
-  border-radius: 50%;
-  border: 3px solid #fff;
-  background: transparent;
-  z-index: 2;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16);
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.8);
   }
 
   .icon-content {
@@ -110,104 +117,216 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-
-    svg {
-      width: 18px;
-      height: 18px;
-      display: block;
-    }
+    color: white;
   }
 }
 
-// Navegação
 .carousel-nav-btn {
   position: absolute;
-  top: 120px;
-  width: 80px;
-  height: 80px;
-  border: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border: none;
   border-radius: 50%;
-  display: inline-flex;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  cursor: pointer;
+  display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  cursor: pointer;
   z-index: 10;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16);
-  transition: transform 0.06s ease;
+  transition: background-color 0.2s ease;
 
-  svg {
-    width: 21px;
-    height: 16px;
-  }
-
-  &:hover {
+  &:hover:not(.disabled) {
     background: rgba(0, 0, 0, 0.8);
   }
 
-  &:active {
-    transform: scale(0.96);
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
-  &.disabled {
-    opacity: 0.4;
-    cursor: default;
-    pointer-events: none;
+  svg {
+    width: 7px;
+    height: 12px;
   }
 }
 
 .carousel-nav-left {
-  left: -40px;
+  left: 8px;
 
   svg {
-    margin-right: -20px;
+    margin-right: -10px;
   }
 }
 
 .carousel-nav-right {
-  right: -40px;
+  right: 8px;
 
   svg {
-    margin-left: -20px;
+    margin-left: -10px;
   }
 }
 
 // Responsividade
-@media (max-width: 1024px) {
+@media (max-width: 1250px) {
   .carousel-container {
-    padding: 0 16px;
+    padding: 0 8px;
   }
 
   .carousel-title {
-    margin-left: 0;
+    padding-left: 40px;
+    font-size: 15px;
   }
 
   .carousel-track-container {
-    margin: 0 16px;
+    padding: 0 0 0 40px;
+  }
+
+  .carousel-track {
+    gap: 12px;
   }
 
   .movie-card {
-    width: 120px;
-    height: 180px;
+    height: 210px;
+    width: 139px;
+  }
+
+  .carousel-nav-btn {
+    width: 36px;
+    height: 36px;
+    top: 50%;
+  }
+
+  .carousel-nav-left {
+    left: 4px;
+  }
+
+  .carousel-nav-right {
+    right: 4px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .carousel-container {
+    padding: 0 8px;
+  }
+
+  .carousel-title {
+    padding-left: 32px;
+    font-size: 14px;
+  }
+
+  .carousel-track-container {
+    padding: 0 0 0 32px;
+  }
+
+  .carousel-track {
+    gap: 10px;
+  }
+
+  .movie-card {
+    width: 180px;
+    height: 120px;
+  }
+
+  .carousel-nav-btn {
+    width: 34px;
+    height: 34px;
+    top: 50%;
+  }
+
+  .carousel-nav-left {
+    left: 2px;
+  }
+
+  .carousel-nav-right {
+    right: 2px;
   }
 }
 
 @media (max-width: 768px) {
+  .carousel-container {
+    padding: 0 6px;
+  }
+
+  .carousel-title {
+    padding-left: 24px;
+    font-size: 13px;
+  }
+
+  .carousel-track-container {
+    padding: 0 0 0 24px;
+  }
+
   .carousel-track {
-    gap: 4px;
-    padding: 20px 0;
+    gap: 8px;
   }
 
   .movie-card {
-    width: 100px;
-    height: 150px;
+    width: 140px;
+    height: 93px;
   }
 
   .carousel-nav-btn {
-    width: 24px;
-    height: 48px;
+    width: 32px;
+    height: 32px;
+    top: 50%;
+  }
+
+  .carousel-nav-left {
+    left: 0;
+  }
+
+  .carousel-nav-right {
+    right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-container {
+    padding: 0 4px;
+  }
+
+  .carousel-title {
+    padding-left: 12px;
+    font-size: 13px;
+  }
+
+  .carousel-track-container {
+    padding: 0 0 0 12px;
+  }
+
+  .carousel-track {
+    gap: 6px;
+  }
+
+  .movie-card {
+    width: 112px;
+    height: 168px;
+  }
+
+  .carousel-nav-btn {
+    width: 28px;
+    height: 28px;
+    top: 50%;
+  }
+
+  .carousel-nav-left {
+    left: 0;
+
+    svg {
+      margin-right: -6px;
+    }
+  }
+
+  .carousel-nav-right {
+    right: 0;
+
+    svg {
+      margin-left: -6px;
+    }
   }
 }
 
